@@ -14,6 +14,7 @@ namespace CringeChat.DataBase
         public static event RefreshListDelegate RefreshListEvent;
 
         public static List<Employee> GetEmployees() => ChatMishaEntities.GetContext().Employees.ToList(); 
+        public static List<Department> GetDepartments() => ChatMishaEntities.GetContext().Departments.ToList(); 
 
         public static Employee GetEmployee(string username, string password)
         {

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CringeChat.DataBase;
 
 namespace CringeChat.Pages
 {
@@ -20,9 +21,14 @@ namespace CringeChat.Pages
     /// </summary>
     public partial class FilterPage : Page
     {
+        public List<Department> Departments { get; set; }
+        public List<Employee> Employees { get; set; }
         public FilterPage()
         {
             InitializeComponent();
+            Departments = DataAccess.GetDepartments();
+            Employees = new List<Employee>();
+            DataContext = this;
         }
 
         private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -33,6 +39,18 @@ namespace CringeChat.Pages
         private void lvEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void cbDepartment_Click(object sender, RoutedEventArgs e)
+        {
+            Employees = new List<Employee>();
+            foreach (Department department in Departments)
+            {
+                if (department.IsChecked)
+                    Employees.AddRange(department.Employees);
+            }
+            lvEmployees.ItemsSource = Employees;
+            lvEmployees.Items.Refresh();
         }
     }
 }

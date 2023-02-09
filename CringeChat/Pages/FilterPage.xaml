@@ -23,7 +23,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <CheckBox x:Name="cbDepartment"/>
+                        <CheckBox x:Name="cbDepartment" IsChecked="{Binding IsChecked}" Click="cbDepartment_Click"/>
                         <TextBlock Text="{Binding Name}"/>
                     </StackPanel>
                 </DataTemplate>

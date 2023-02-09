@@ -98,6 +98,7 @@
     <Compile Include="DataBase\Department.cs">
       <DependentUpon>ChatModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataBase\DepartmentPart.cs" />
     <Compile Include="DataBase\Employee.cs">
       <DependentUpon>ChatModel.tt</DependentUpon>
     </Compile>

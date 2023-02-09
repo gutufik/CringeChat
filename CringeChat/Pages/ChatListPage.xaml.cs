@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CringeChat.DataBase;
 
 namespace CringeChat.Pages
 {
@@ -20,7 +21,7 @@ namespace CringeChat.Pages
     /// </summary>
     public partial class ChatListPage : Page
     {
-        public string EmployeeName { get; set; }
+        public Emplo EmployeeName { get; set; }
         public ChatListPage()
         {
             InitializeComponent();
@@ -30,12 +31,12 @@ namespace CringeChat.Pages
 
         private void btnFinder_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new Pages.FilterPage());
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-
+            App.Current.MainWindow.Close();
         }
     }
 }
