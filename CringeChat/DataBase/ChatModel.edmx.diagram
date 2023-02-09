@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dcee1aba9d6742268b1ff794250f2911" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="ChatMishaModel.ChatMessage" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChatMishaModel.Chatroom" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChatMishaModel.Department" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChatMishaModel.Employee" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChatMishaModel.EmployeeChat" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChatMishaModel.sysdiagram" Width="1.5" PointX="5.75" PointY="6.875" IsExpanded="true" />
+        <AssociationConnector Association="ChatMishaModel.FK_ChatMessage_Chatroom" ManuallyRouted="false" />
+        <AssociationConnector Association="ChatMishaModel.FK_ChatMessage_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="ChatMishaModel.FK_EmployeeChat_Chatroom" ManuallyRouted="false" />
+        <AssociationConnector Association="ChatMishaModel.FK_Employee_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="ChatMishaModel.FK_EmployeeChat_Employee" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
