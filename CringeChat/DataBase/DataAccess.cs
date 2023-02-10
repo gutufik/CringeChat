@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using CringeChat.DataBase;
+using System.Collections;
 
 namespace CringeChat.DataBase
 {
@@ -16,11 +17,31 @@ namespace CringeChat.DataBase
         public static List<Employee> GetEmployees() => ChatMishaEntities.GetContext().Employees.ToList(); 
         public static List<Department> GetDepartments() => ChatMishaEntities.GetContext().Departments.ToList(); 
 
+        public static List<Chatroom> GetChatrooms() => ChatMishaEntities.GetContext().Chatrooms.ToList();
+
         public static Employee GetEmployee(string username, string password)
         {
             var encryptedPassword = ComputeStringToSha256Hash(password);
             return ChatMishaEntities.GetContext().Employees.FirstOrDefault(x => x.Name == username && x.Password == encryptedPassword);
         }
+
+        public static List<ChatMessage> GetChatMessages() => ChatMishaEntities.GetContext().ChatMessages.ToList();
+
+        public static List<ChatMessage> GetChatMessages(Chatroom chatroom)
+        {
+            return GetChatMessages().FindAll(x => x.Chatroom == chatroom);
+        }
+
+        public static void SaveChatMessage(ChatMessage message)
+        {
+            if (message.Id == 0)
+                ChatMishaEntities.GetContext().ChatMessages.Add(message);
+
+            ChatMishaEntities.GetContext().SaveChanges();
+            RefreshListEvent?.Invoke();
+        }
+
+
         static string ComputeStringToSha256Hash(string plainText)
         {
             // Create a SHA256 hash from string   

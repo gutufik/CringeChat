@@ -36,10 +36,6 @@ namespace CringeChat.Pages
 
         }
 
-        private void lvEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
 
         private void cbDepartment_Click(object sender, RoutedEventArgs e)
         {
@@ -51,6 +47,20 @@ namespace CringeChat.Pages
             }
             lvEmployees.ItemsSource = Employees;
             lvEmployees.Items.Refresh();
+        }
+
+        private void lvEmployees_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var selectedMember = (sender as ListView).SelectedItem as Employee;
+
+            NavigationService.Navigate(new ChatPage(
+                new Chatroom {
+                EmployeeChats = new List<EmployeeChat>
+                {
+                    new EmployeeChat{Employee = App.Employee},
+                    new EmployeeChat{Employee = selectedMember},
+                } 
+        }));
         }
     }
 }

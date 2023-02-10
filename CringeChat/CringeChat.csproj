@@ -94,6 +94,7 @@
     <Compile Include="DataBase\Chatroom.cs">
       <DependentUpon>ChatModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataBase\ChatroomPart.cs" />
     <Compile Include="DataBase\DataAccess.cs" />
     <Compile Include="DataBase\Department.cs">
       <DependentUpon>ChatModel.tt</DependentUpon>
@@ -120,6 +121,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ChatPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\FilterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -131,6 +136,9 @@
     </Compile>
     <Compile Include="Pages\ChatListPage.xaml.cs">
       <DependentUpon>ChatListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ChatPage.xaml.cs">
+      <DependentUpon>ChatPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\FilterPage.xaml.cs">
       <DependentUpon>FilterPage.xaml</DependentUpon>

@@ -12,6 +12,12 @@
         <Style TargetType="Button">
             <Setter Property="Margin" Value="20"/>
         </Style>
+        <Style  TargetType="TextBox">
+            <Setter Property="Margin" Value="20"/>
+        </Style>
+        <Style TargetType="PasswordBox">
+            <Setter Property="Margin" Value="20"/>
+        </Style>
          
     </Application.Resources>
 </Application>

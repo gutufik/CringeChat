@@ -36,7 +36,7 @@
                   Grid.Column="1"
                   Grid.Row="1"
                   ItemsSource="{Binding Employees}" 
-                  SelectionChanged="lvEmployees_SelectionChanged" 
+                  MouseDoubleClick="lvEmployees_MouseDoubleClick"
                   DisplayMemberPath="Name"/>
     </Grid>
 </Page>

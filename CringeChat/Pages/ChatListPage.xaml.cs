@@ -21,11 +21,13 @@ namespace CringeChat.Pages
     /// </summary>
     public partial class ChatListPage : Page
     {
-        public Emplo EmployeeName { get; set; }
+        public Employee Employee { get; set; }
+        public List<Chatroom> Chatrooms { get; set; }
         public ChatListPage()
         {
             InitializeComponent();
-            EmployeeName = App.Employee.Name;
+            Employee = App.Employee;
+            Chatrooms = DataAccess.GetChatrooms();
             DataContext = this;
         }
 
@@ -37,6 +39,12 @@ namespace CringeChat.Pages
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             App.Current.MainWindow.Close();
+        }
+
+        private void lvChats_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var chatroom = (lvChats.SelectedItem as EmployeeChat).Chatroom;
+            NavigationService.Navigate(new ChatPage(chatroom));
         }
     }
 }

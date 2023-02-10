@@ -14,22 +14,24 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock >
             <Run Text="Hello"/>
-            <Run Text="{Binding EmployeeName}"/>
+            <Run Text="{Binding Employee.Name}"/>
         </TextBlock>
 
         <TextBlock Grid.Row="1" Text="Your open chatrooms"/>
-        <ListView x:Name="lvChats" ItemsSource="{Binding Chats}" Grid.Row="2" Grid.ColumnSpan="2" HorizontalContentAlignment="Stretch">
+        <ListView x:Name="lvChats" ItemsSource="{Binding Employee.EmployeeChats}" Grid.Row="2" Grid.ColumnSpan="2"
+                  HorizontalContentAlignment="Stretch"
+                  SelectionChanged="lvChats_SelectionChanged">
             <ListView.View>
                 <GridView >
-                    <GridViewColumn Header="Topic"/>
-                    <GridViewColumn Header="Last message"/>
+                    <GridViewColumn Header="Topic" DisplayMemberBinding="{Binding Chatroom.Topic}"/>
+                    <GridViewColumn Header="Last message" DisplayMemberBinding="{Binding Chatroom.LastMessageDate}"/>
                 </GridView>
             </ListView.View>
         </ListView>
