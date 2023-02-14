@@ -32,23 +32,27 @@ namespace CringeChat.Pages
 
         private void DataAccess_RefreshListEvent()
         {
+            lvMembers.ItemsSource = Chatroom.EmployeeChats;
+            lvMembers.Items.Refresh();
+
             lvMessages.ItemsSource = DataAccess.GetChatMessages(Chatroom);
             lvMessages.Items.Refresh();
         }
 
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new Pages.FilterPage(Chatroom));
         }
 
         private void btnChangeTopic_Click(object sender, RoutedEventArgs e)
         {
-
+            (new Windows.ChangeTopicWindow(Chatroom)).ShowDialog();
         }
 
         private void btnLeaveChat_Click(object sender, RoutedEventArgs e)
         {
-
+            DataAccess.LeaveChat(App.Employee, Chatroom);
+            NavigationService.GoBack();
         }
 
         private void btnSendMessage_Click(object sender, RoutedEventArgs e)

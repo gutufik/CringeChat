@@ -27,8 +27,16 @@ namespace CringeChat.Pages
         {
             InitializeComponent();
             Employee = App.Employee;
-            Chatrooms = DataAccess.GetChatrooms();
+            Chatrooms = App.Employee.EmployeeChats.Select(x => x.Chatroom).ToList();
+            DataAccess.RefreshListEvent += DataAccess_RefreshListEvent;
             DataContext = this;
+        }
+
+        private void DataAccess_RefreshListEvent()
+        {
+            Chatrooms = App.Employee.EmployeeChats.Select(x => x.Chatroom).ToList();
+            lvChats.ItemsSource = Chatrooms;
+            lvChats.Items.Refresh();
         }
 
         private void btnFinder_Click(object sender, RoutedEventArgs e)
@@ -43,8 +51,9 @@ namespace CringeChat.Pages
 
         private void lvChats_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var chatroom = (lvChats.SelectedItem as EmployeeChat).Chatroom;
-            NavigationService.Navigate(new ChatPage(chatroom));
+            var employeeChat = (lvChats.SelectedItem as EmployeeChat);
+            if (employeeChat != null)
+                NavigationService.Navigate(new ChatPage(employeeChat.Chatroom));
         }
     }
 }

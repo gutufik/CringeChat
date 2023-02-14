@@ -25,7 +25,27 @@ namespace CringeChat.DataBase
             return ChatMishaEntities.GetContext().Employees.FirstOrDefault(x => x.Name == username && x.Password == encryptedPassword);
         }
 
+        internal static void SaveChatroom(Chatroom chatroom)
+        {
+            if (chatroom.Id == 0)
+                ChatMishaEntities.GetContext().Chatrooms.Add(chatroom);
+
+            ChatMishaEntities.GetContext().SaveChanges();
+            RefreshListEvent?.Invoke();
+        }
+
         public static List<ChatMessage> GetChatMessages() => ChatMishaEntities.GetContext().ChatMessages.ToList();
+
+        public static void LeaveChat(Employee employee, Chatroom chatroom)
+        {
+            var employeeChat = ChatMishaEntities.GetContext().EmployeeChats
+                .FirstOrDefault(x => x.EmployeeId == employee.Id && x.ChatId == chatroom.Id);
+            if (employeeChat != null)
+                ChatMishaEntities.GetContext().EmployeeChats.Remove(employeeChat);
+
+            ChatMishaEntities.GetContext().SaveChanges();
+            RefreshListEvent?.Invoke();
+        }
 
         public static List<ChatMessage> GetChatMessages(Chatroom chatroom)
         {

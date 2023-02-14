@@ -25,6 +25,7 @@ namespace CringeChat.Pages
         {
             InitializeComponent();
             tbName.Text = Properties.Settings.Default.Username;
+            pbPassword.Password = Properties.Settings.Default.Password;
         }
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
@@ -38,6 +39,12 @@ namespace CringeChat.Pages
                 if ((bool)cbRememberMe.IsChecked) 
                 {
                     Properties.Settings.Default.Username = App.Employee.Username;
+                    Properties.Settings.Default.Password = password;
+                    Properties.Settings.Default.Save();
+                }
+                else
+                {
+                    Properties.Settings.Default.Reset();
                     Properties.Settings.Default.Save();
                 }
                 NavigationService.Navigate(new Pages.ChatListPage());

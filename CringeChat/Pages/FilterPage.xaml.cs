@@ -23,9 +23,18 @@ namespace CringeChat.Pages
     {
         public List<Department> Departments { get; set; }
         public List<Employee> Employees { get; set; }
+        public Chatroom Chatroom { get; set; }
         public FilterPage()
         {
             InitializeComponent();
+            Departments = DataAccess.GetDepartments();
+            Employees = new List<Employee>();
+            DataContext = this;
+        }
+
+        public FilterPage(Chatroom chatroom)
+        {
+            Chatroom = chatroom;
             Departments = DataAccess.GetDepartments();
             Employees = new List<Employee>();
             DataContext = this;
@@ -52,15 +61,23 @@ namespace CringeChat.Pages
         private void lvEmployees_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var selectedMember = (sender as ListView).SelectedItem as Employee;
-
-            NavigationService.Navigate(new ChatPage(
-                new Chatroom {
-                EmployeeChats = new List<EmployeeChat>
-                {
-                    new EmployeeChat{Employee = App.Employee},
-                    new EmployeeChat{Employee = selectedMember},
-                } 
-        }));
+            if (Chatroom != null)
+            {
+                Chatroom.EmployeeChats.Add(new EmployeeChat() { ChatId = Chatroom.Id, EmployeeId = selectedMember.Id });
+                NavigationService.Navigate(new ChatPage(Chatroom));
+            }
+            else
+            {
+                NavigationService.Navigate(new ChatPage(
+                    new Chatroom
+                    {
+                        EmployeeChats = new List<EmployeeChat>
+                    {
+                        new EmployeeChat{Employee = App.Employee},
+                        new EmployeeChat{Employee = selectedMember},
+                    }
+                    }));
+            }
         }
     }
 }
